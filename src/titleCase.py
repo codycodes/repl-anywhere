@@ -1,3 +1,5 @@
+import sys
+
 # From https://www.geeksforgeeks.org/convert-string-to-title-case-in-python/ ; all rights to the author
 # Edited by Cody Gagnon on 2-23-21
 # Function to convert into title case 
@@ -25,35 +27,17 @@ def generateTitleCase(input_string):
     
     # merging the 3 lists 
     lower_case = articles + conjunctions + prepositions 
-    
-    # variable declaration for the output text 
-    output_string = "" 
-    
-    # separating each word in the string 
-    input_list = input_string.split(" ") 
-    
-    # checking each word 
+
+    output = []
+    input_list = input_string.split(" ")
     for word in input_list: 
-        
-        # if the word exists in the list 
-        # then no need to capitalize it 
-        if word in lower_case: 
-            output_string += word + " "
-            
-        # if the word does not exists in 
-        # the list, then capitalize it 
-        else: 
-            temp = word.title() 
-            output_string += temp + " "
-            
-    
-    return output_string 
+        if word not in lower_case:
+            word = word.title()
+
+        output.append(word)
+    return ' '.join(output)
 
 # Driver code 
 if __name__=='__main__': 
-    input_text1 = "The quick brown fox jumps over the lazy dog."
-    input_text2 = "A tale of two cities"
-    
-    print(generateTitleCase(input_text1)) 
-    print(generateTitleCase(input_text2)) 
-
+    original_text = sys.argv[1]
+    print(generateTitleCase(original_text))
